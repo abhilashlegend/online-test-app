@@ -1,36 +1,89 @@
 <div class="app-reg-container text-center">
-    <form class="form-signin">
+    <form class="form-signin" novalidate [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <img class="mb-4" src="./assets/logo.png" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+  <div class="error-block">
+    <!-- First Name Error -->
+    <div [ngClass]="{'is-invalid' : !registerForm.get('firstname')?.valid && registerForm.get('firstname')?.touched}">
+      <div class="invalid-feedback" *ngIf="!registerForm.get('firstname')?.valid && registerForm.get('firstname')?.touched">
+        Please enter first name
+      </div>
+    </div>    
+
+    <!-- Last Name Error -->
+    <div [ngClass]="{'is-invalid' : !registerForm.get('lastname')?.valid && registerForm.get('lastname')?.touched}">
+      <div class="invalid-feedback" *ngIf="!registerForm.get('lastname')?.valid && registerForm.get('lastname')?.touched">
+        Please enter last name
+      </div>
+    </div>
+    
+    <!-- Email Error -->
+    <div [ngClass]="{'is-invalid' : !registerForm.get('email')?.valid && registerForm.get('email')?.touched}">
+      <div class="invalid-feedback" *ngIf="!registerForm.get('email')?.valid && registerForm.get('email')?.touched">
+        Please enter valid email
+      </div>
+    </div>
+
+    <!-- Phone Error -->
+    <div [ngClass]="{'is-invalid' : !registerForm.get('phone')?.valid && registerForm.get('phone')?.touched}">
+      <div class="invalid-feedback" *ngIf="!registerForm.get('phone')?.valid && registerForm.get('phone')?.touched">
+        Please enter valid phone number
+      </div>
+    </div>
+
+    <!-- Qualification Error -->
+    <div [ngClass]="{'is-invalid' : !registerForm.get('qualification')?.valid && registerForm.get('qualification')?.touched}">
+      <div class="invalid-feedback" *ngIf="!registerForm.get('qualification')?.valid && registerForm.get('qualification')?.touched">
+        Please select a qualification
+      </div>
+    </div>
+
+    <!-- Password Error -->
+    <div [ngClass]="{'is-invalid' : !registerForm.get('password')?.valid && registerForm.get('password')?.touched}">
+      <div class="invalid-feedback" *ngIf="!registerForm.get('password')?.valid && registerForm.get('password')?.touched">
+        Please enter a valid password
+      </div>
+    </div>
+
+     <!-- Confirm Password Error -->
+     
+    <div [ngClass]="{'is-invalid' : registerForm.get('confirmpassword')?.touched && registerForm.hasError('mismatch')}">
+      <div class="invalid-feedback" *ngIf="registerForm.get('confirmpassword')?.touched && registerForm.hasError('mismatch')">
+        Confirm Password does not match password
+      </div>
+    </div>
+
+  </div>
   <label for="inputFirstName" class="sr-only">First Name</label>
-  <input type="text" id="inputFirstName" class="form-control" placeholder="First Name" required autofocus>
+  <input type="text" id="inputFirstName" class="form-control" formControlName="firstname" [ngClass]="{'is-invalid' : !registerForm.get('firstname')?.valid && registerForm.get('firstname')?.touched}" placeholder="First Name" required autofocus>
+  
   <label for="inputLastName" class="sr-only">Last Name</label>
-  <input type="text" id="inputLastName" class="form-control" placeholder="Last Name" required autofocus>
+  <input type="text" id="inputLastName" class="form-control" formControlName="lastname" [ngClass]="{'is-invalid' : !registerForm.get('lastname')?.valid && registerForm.get('lastname')?.touched}" placeholder="Last Name" required autofocus>
   <label for="inputEmail" class="sr-only">Email address</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <input type="email" id="inputEmail" class="form-control" formControlName="email" placeholder="Email address" [ngClass]="{'is-invalid' : !registerForm.get('email')?.valid && registerForm.get('email')?.touched}" required autofocus>
   <label for="inputPhone" class="sr-only">Phone</label>
-  <input type="text" id="inputPhone" class="form-control" placeholder="Phone" required autofocus>
+  <input type="text" id="inputPhone" class="form-control" placeholder="Phone" formControlName="phone" required autofocus [ngClass]="{'is-invalid' : !registerForm.get('phone')?.valid && registerForm.get('phone')?.touched}">
   <label for="inputQualification" class="sr-only">Qualification</label>
-  <select class="form-control" id="inputQualification" name="qualification">
-    <option>Select Qualification</option>
-    <option>BCA</option>
-    <option>BE</option>
-    <option>BTECH</option>
-    <option>BSc CS</option>
-    <option>MCA</option>
-    <option>ME</option>
-    <option>MTECH</option>
-    <option>MSc CS</option>
-    <option>Other</option>
+  <select class="form-control" id="inputQualification" formControlName="qualification" [ngClass]="{'is-invalid' : !registerForm.get('qualification')?.valid && registerForm.get('qualification')?.touched}">
+    <option [ngValue]="null" selected disabled hidden>Select Qualification</option>
+    <option value="BCA">BCA</option>
+    <option value="BE">BE</option>
+    <option value="BTECH">BTECH</option>
+    <option value="BSc CS">BSc CS</option>
+    <option value="MCA">MCA</option>
+    <option value="ME">ME</option>
+    <option value="MTECH">MTECH</option>
+    <option value="MSc CS">MSc CS</option>
+    <option value="Other">Other</option>
   </select>
   
   <label for="inputPassword" class="sr-only">Password</label>
-  <input type="text" id="inputPassword" class="form-control" placeholder="Password" required>
+  <input type="password" id="inputPassword" class="form-control" formControlName="password" [ngClass]="{'is-invalid' : !registerForm.get('password')?.valid && registerForm.get('password')?.touched}" placeholder="Password" required>
 
   <label for="inputConfirmPassword" class="sr-only">Confirm Password</label>
-  <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required>
-  <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Submit</button>
+  <input type="password" id="inputConfirmPassword" class="form-control" formControlName="confirmpassword" [ngClass]="{'is-invalid' : registerForm.get('confirmpassword')?.touched && registerForm.hasError('mismatch')}" placeholder="Confirm Password" required>
+  <button class="btn btn-lg btn-primary btn-block mb-3" [disabled]="registerForm.status === 'INVALID'" type="submit">Submit</button>
   <a class="btn btn-lg btn-primary btn-block" routerLink="/">Login</a>
   <p class="mt-5 mb-3 text-muted">App Developed By Abhilash N (abhilash456a@live.com)</p>
   </form>
-  </div>
+  </div>  

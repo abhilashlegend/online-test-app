@@ -45,6 +45,10 @@
     border-bottom-right-radius: 0.375rem !important;
   }
 
+  .form-control.is-invalid {
+    border-color: #ced4da;
+  }
+
   .form-signin input[type="text"] {
     margin-bottom: -1px;
     border-radius: 0px;

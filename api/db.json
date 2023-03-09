@@ -1,0 +1,10 @@
+{
+  "users": {
+    "firstname": "abhilash",
+    "lastname": "N",
+    "email": "abhilash@example.com",
+    "phone": "123456789",
+    "qualification": "MCA",
+    "password": "123456789"
+  }
+}

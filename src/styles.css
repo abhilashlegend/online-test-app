@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+.is-invalid .invalid-feedback { display: block; text-align: left;}
+
+.is-invalid {
+    padding-bottom: 10px;
+}
+
+.error-msg { 
+    text-align: left;
+    color: red;
+    font-weight: bold;
+}
