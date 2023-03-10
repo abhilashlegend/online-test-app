@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "firstname": "abhilash",
+        "lastname": "N",
+        "email": "abhilash@example.com",
+        "phone": "123456789",
+        "qualification": "MCA",
+        "password": "123456789"
+    },
+    {
+        "id": 2,
+        "firstname": "anup",
+        "lastname": "kamath",
+        "email": "anup@example.com",
+        "phone": "123456789",
+        "qualification": "BE",
+        "password": "123456789"
+    },
+    {
+        "id": 3,
+        "firstname": "abhishek",
+        "lastname": "kulkarni",
+        "email": "abhishek@example.com",
+        "phone": "123456789",
+        "qualification": "MCA",
+        "password": "123456789"
+    }
+]

@@ -1,17 +1,32 @@
 <div class="app-login-container text-center">
-    <form class="form-signin">
+    <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="login()">
   <img class="mb-4" src="./assets/logo.png" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <!-- Email Error -->
+    <div [ngClass]="{'is-invalid' : !loginForm.get('email')?.valid && loginForm.get('email')?.touched}">
+      <div class="invalid-feedback" *ngIf="!loginForm.get('email')?.valid && loginForm.get('email')?.touched">
+        Please enter valid email
+      </div>
+    </div>
+
+    <!-- Password Error -->
+    <div [ngClass]="{'is-invalid' : !loginForm.get('password')?.valid && loginForm.get('password')?.touched}">
+      <div class="invalid-feedback" *ngIf="!loginForm.get('password')?.valid && loginForm.get('password')?.touched">
+        Please enter a password
+      </div>
+    </div>
+
+
   <label for="inputEmail" class="sr-only">Email address</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <input type="email" id="inputEmail" formControlName="email" class="form-control" placeholder="Email address" />
   <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-  <div class="checkbox mb-3">
+  <input type="password" id="inputPassword" formControlName="password" class="form-control" placeholder="Password" />
+  <!-- <div class="checkbox mb-3">
     <label>
       <input type="checkbox" value="remember-me"> Remember me
     </label>
-  </div>
-  <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Sign in</button>
+  </div> -->
+  <button class="btn btn-lg btn-primary btn-block mb-3" type="submit" [disabled]="loginForm.status === 'INVALID'">Sign in</button>
   <a class="btn btn-lg btn-primary btn-block" routerLink="/register">Register</a>
   <p class="mt-5 mb-3 text-muted">App Developed By Abhilash N (abhilash456a@live.com)</p>
   </form>
