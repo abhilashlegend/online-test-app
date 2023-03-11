@@ -1,0 +1,11 @@
+<div class="quiz-container">
+    <div class="quiz-question">{{ test[currentQue]["question"] }}</div>
+    <div class="quiz-option-container">
+        <div class="" *ngFor="let option of test[currentQue]['options']">
+              <ul class="options-list" *ngFor="let ans of option | keyvalue">
+                <li class="quiz-option">{{ ans.key + ' )' }} 
+                <span [innerHTML]="ans.value"></span></li>
+              </ul>  
+        </div>
+    </div>
+</div>

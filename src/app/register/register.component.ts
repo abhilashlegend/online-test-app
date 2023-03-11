@@ -21,7 +21,7 @@ interface User {
 export class RegisterComponent implements OnInit {
   public registerForm!: FormGroup;
 
-  private _jsonURL = 'assets/users.json';
+  private _jsonURL = 'http://localhost:3000/users';
   private _users:User[] = [];
 
   constructor(private http: HttpClient, private router: Router){
@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
  
     let maxId = Math.max(...this._users.map(user => user.id));
-
+  
     delete this.registerForm.value.confirmpassword
       
     const newUser = {
@@ -72,6 +72,5 @@ export class RegisterComponent implements OnInit {
       alert("Something went wrong");
       console.log(error);
     })
-    console.log(maxId);
   }
 }

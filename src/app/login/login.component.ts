@@ -14,15 +14,13 @@ export class LoginComponent implements OnInit {
 
   private users:[] = [];
 
-  private _jsonURL = 'assets/users.json';
+  private _jsonURL = 'http://localhost:3000/users';
 
   public getJSON(): Observable<any> {
     return this.http.get(this._jsonURL);
   }
   constructor(private http: HttpClient, private router: Router){
-    this.getJSON().subscribe(data => {
-      this.users = data;
-     });
+    
   }
 
   ngOnInit(){
@@ -34,17 +32,33 @@ export class LoginComponent implements OnInit {
 
   login() {
     console.log(this.loginForm.value);
-    
-   
+      
+
+    /*
       const user = this.users.find((a:any) => {
         return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
       });
+      */
 
-      if(user){
-        alert("Login successfull");
-      } else {
-        alert("Wrong email or password");
-      }
+      
+
+      this.http.get<any>(this._jsonURL).subscribe(res => {
+      
+        // const user = res.json().find((a:any) => {
+        //     return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
+        //   })
+
+        const user = res.email === this.loginForm.value.email && res.password === this.loginForm.value.password;
+          if(user){
+            alert("Login successfull");
+            this.router.navigate(["dashboard"]);
+          } else {
+            alert("Wrong email or password");
+          }  
+      }, err => {
+        console.log("Error: " + err)
+      })
+     
     
   }
 }

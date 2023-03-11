@@ -1,0 +1,8 @@
+.quiz-container {
+    padding: 1rem;
+}
+
+.quiz-question {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
