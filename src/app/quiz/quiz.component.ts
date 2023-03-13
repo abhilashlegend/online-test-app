@@ -9,6 +9,12 @@ import { Observable } from 'rxjs';
 })
 export class QuizComponent implements OnInit {
 
+quizform: any = {}
+
+public selectedOptionClass:string = '';
+
+public status: boolean = false;
+
   private _quizUrl = '/assets/test.json';
 
   constructor(private http: HttpClient){}
@@ -28,6 +34,21 @@ export class QuizComponent implements OnInit {
     return this.http.get(this._quizUrl);
   }
 
+  public onSelectOptionHandler(e:any) {
+   console.log(e);
+   this.selectedOptionClass = e.target.value;
+  }
 
+  nextQuestionHandler() {
+    if(this.currentQue < this.test.length){
+      this.currentQue++
+    }
+  }
+
+  prevQuestionHandler() {
+    if(this.currentQue > 0){
+      this.currentQue--;
+    }
+  }
 
 }

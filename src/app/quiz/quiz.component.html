@@ -1,11 +1,23 @@
 <div class="quiz-container">
+  <form #f="ngForm">
+  <div class="section-heading">Question </div>
     <div class="quiz-question">{{ test[currentQue]["question"] }}</div>
     <div class="quiz-option-container">
-        <div class="" *ngFor="let option of test[currentQue]['options']">
+        <div class="quiz-option-list" *ngFor="let option of test[currentQue]['options']">
+              <div class="section-heading">Options </div>
               <ul class="options-list" *ngFor="let ans of option | keyvalue">
-                <li class="quiz-option">{{ ans.key + ' )' }} 
-                <span [innerHTML]="ans.value"></span></li>
+                <li [ngClass]="{'quiz-option selected-option': selectedOptionClass === ans.value, 'quiz-option' : selectedOptionClass !== ans.value}">
+                  {{ ans.key + ' )' }} 
+                  <span [innerHTML]="ans.value"></span>
+                  <input name="quizoption" [value]="ans.value" (change)="onSelectOptionHandler($event)" class="quiz-radio-btn" type="radio" id="quizoptions" />
+                </li>
+
               </ul>  
+              <div class="btn-section justify-content-between">
+                  <button class="btn btn-primary" (click)="prevQuestionHandler()" [disabled]="currentQue === 0">Previous</button>
+                  <button class="btn btn-primary" (click)="nextQuestionHandler()" [disabled]="currentQue === test.length">Next</button>
+              </div>
         </div>
     </div>
+  </form>
 </div>
