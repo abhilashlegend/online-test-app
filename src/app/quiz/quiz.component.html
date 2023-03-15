@@ -1,7 +1,7 @@
 <div class="quiz-container">
   <form #f="ngForm">
   <div class="section-heading">Question </div>
-    <div class="quiz-question">{{ currentQue + 1 + ')' }}  {{ test[currentQue]["question"] }}</div>
+    <div class="quiz-question">{{ currentQue + 1 + ')' }}  <span [innerHTML]="test[currentQue]['question']"></span></div>
     <div class="quiz-option-container">
         <div class="quiz-option-list" *ngFor="let option of test[currentQue]['options']">
               <div class="section-heading">Options </div>
