@@ -6,10 +6,10 @@ import { RegisterComponent } from './register/register.component';
 import { ResultComponent } from './result/result.component';
 
 const routes: Routes = [
-  {path:'', component: LoginComponent, outlet: "external"},
-  {path:'register', component: RegisterComponent, outlet: "external"},
-  {path:'dashboard', component: DashboardComponent, outlet: "internal"},
-  {path: 'result', component: ResultComponent, outlet: "internal" }
+  {path:'', component: LoginComponent},
+  {path:'register', component: RegisterComponent},
+  {path:'dashboard', component: DashboardComponent},
+  {path: 'result', component: ResultComponent }
 ];
 
 @NgModule({

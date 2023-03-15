@@ -11,8 +11,6 @@ import { TestService } from '../service/test.service';
 })
 export class QuizComponent implements OnInit {
 
-quizform: any = {}
-
 public selectedOptionClass:string = '';
 
 public status: boolean = false;
@@ -28,7 +26,6 @@ public status: boolean = false;
   ngOnInit(): void {
     this.getJSON().subscribe(res => {
       this.test = res;
-      console.log(this.test);
     })
   }
 

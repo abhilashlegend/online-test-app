@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
             alert("Login successfull");
             this.router.navigate(["dashboard"]);
             this.uservice.loggedIn = true;
+            console.log(this.uservice.loggedIn);
           } else {
             alert("Wrong email or password");
           }  
