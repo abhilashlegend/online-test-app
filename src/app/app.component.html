@@ -1,2 +1,5 @@
-
-<router-outlet></router-outlet>
+<app-header *ngIf="loggedIn"></app-header>
+<div class="container-fluid">
+    <router-outlet name="external"></router-outlet>
+    <router-outlet name="internal"></router-outlet>
+</div>

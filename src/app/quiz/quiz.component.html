@@ -1,7 +1,7 @@
 <div class="quiz-container">
   <form #f="ngForm">
   <div class="section-heading">Question </div>
-    <div class="quiz-question">{{ test[currentQue]["question"] }}</div>
+    <div class="quiz-question">{{ currentQue + 1 + ')' }}  {{ test[currentQue]["question"] }}</div>
     <div class="quiz-option-container">
         <div class="quiz-option-list" *ngFor="let option of test[currentQue]['options']">
               <div class="section-heading">Options </div>
@@ -16,6 +16,7 @@
               <div class="btn-section justify-content-between">
                   <button class="btn btn-primary" (click)="prevQuestionHandler()" [disabled]="currentQue === 0">Previous</button>
                   <button class="btn btn-primary" (click)="nextQuestionHandler()" [disabled]="currentQue === test.length">Next</button>
+                  <button class="btn btn-danger" (click)="quitQuizHandler()">Quit</button>
               </div>
         </div>
     </div>

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   public getJSON(): Observable<any> {
     return this.http.get(this._jsonURL);
   }
-  constructor(private http: HttpClient, private router: Router){
+  constructor(private http: HttpClient, private router: Router, private uservice: UserService){
     
   }
 
@@ -52,6 +53,7 @@ export class LoginComponent implements OnInit {
           if(user){
             alert("Login successfull");
             this.router.navigate(["dashboard"]);
+            this.uservice.loggedIn = true;
           } else {
             alert("Wrong email or password");
           }  

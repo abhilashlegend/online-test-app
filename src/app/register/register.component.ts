@@ -12,6 +12,7 @@ interface User {
   phone: string;
   qualification: string;
   password: string;
+  score: number;
 }
 @Component({
   selector: 'app-register',
@@ -22,7 +23,7 @@ export class RegisterComponent implements OnInit {
   public registerForm!: FormGroup;
 
   private _jsonURL = 'http://localhost:3000/users';
-  private _users:User[] = [];
+  private _users:Array<User> = [];
 
   constructor(private http: HttpClient, private router: Router){
     
@@ -42,6 +43,8 @@ export class RegisterComponent implements OnInit {
     this.getJSON().subscribe(data => {
       this._users = data;
      });
+
+    console.log(this._users);
   }  
 
   confirmPasswordValidator(g: any){
@@ -53,15 +56,33 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
- 
-    let maxId = Math.max(...this._users.map(user => user.id));
+
+     
+    
+    let maxId;
+    
+    if(Array.isArray(this._users)){
+      maxId = Math.max(...this._users.map(user => user.id));
+    } else {
+      if(this._users["email"] === this.registerForm.value.email){
+        alert("User already exists");
+        return;
+      }
+      maxId = this._users["id"] + 1
+    }
+
+    console.log(maxId);
+   
   
     delete this.registerForm.value.confirmpassword
       
     const newUser = {
       id: maxId + 1,
+      score: 0,
       ...this.registerForm.value
     }
+
+    
 
     this.http.post<any>("http://localhost:3000/users", newUser)
     .subscribe(res => {
