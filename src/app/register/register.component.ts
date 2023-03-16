@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UserService } from '../service/user.service';
 
 interface User {
   id: number;
@@ -25,7 +26,7 @@ export class RegisterComponent implements OnInit {
   private _jsonURL = 'http://localhost:3000/users';
   private _users:Array<User> = [];
 
-  constructor(private http: HttpClient, private router: Router){
+  constructor(private http: HttpClient, private router: Router, private uservice: UserService){
     
   }
 
@@ -40,25 +41,17 @@ export class RegisterComponent implements OnInit {
       'confirmpassword': new FormControl(null, [Validators.required, Validators.minLength(6)])
     }, { validators: this.confirmPasswordValidator})   
 
-    this.getJSON().subscribe(data => {
+    this.uservice.getUsers().subscribe(data => {
       this._users = data;
-     });
-
-    console.log(this._users);
+    })
   }  
 
   confirmPasswordValidator(g: any){
     return g.get('password')?.value === g.get('confirmpassword')?.value ? null : {'mismatch': true}
   }
 
-  public getJSON(): Observable<any> {
-    return this.http.get(this._jsonURL);
-  }
-
   onSubmit() {
 
-     
-    
     let maxId;
     
     if(Array.isArray(this._users)){
@@ -83,8 +76,8 @@ export class RegisterComponent implements OnInit {
     }
 
     
-
-    this.http.post<any>("http://localhost:3000/users", newUser)
+    
+    this.uservice.postUser(newUser)
     .subscribe(res => {
       alert("registration successfull");
       this.registerForm.reset();

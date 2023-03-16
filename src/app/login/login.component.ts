@@ -12,17 +12,8 @@ import { UserService } from '../service/user.service';
 })
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
-
-  private users:[] = [];
-
-  private _jsonURL = 'http://localhost:3000/users';
-
-  public getJSON(): Observable<any> {
-    return this.http.get(this._jsonURL);
-  }
-  constructor(private http: HttpClient, private router: Router, private uservice: UserService){
-    
-  }
+  
+  constructor(private http: HttpClient, private router: Router, private uservice: UserService){ }
 
   ngOnInit(){
     this.loginForm = new FormGroup({
@@ -32,36 +23,22 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginForm.value);
+    let hasUser:boolean;
+    this.uservice.getUsers().subscribe(res => {
       
-
-    /*
-      const user = this.users.find((a:any) => {
-        return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
-      });
-      */
-
-      
-
-      this.http.get<any>(this._jsonURL).subscribe(res => {
-      
-        // const user = res.json().find((a:any) => {
-        //     return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
-        //   })
-
-        const user = res.email === this.loginForm.value.email && res.password === this.loginForm.value.password;
-          if(user){
-            alert("Login successfull");
-            this.router.navigate(["dashboard"]);
-            this.uservice.loggedIn = true;
-            console.log(this.uservice.loggedIn);
-          } else {
-            alert("Wrong email or password");
-          }  
-      }, err => {
-        console.log("Error: " + err)
+      res.find((a:any) => {
+        hasUser = a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
       })
-     
+      if(hasUser){
+        alert("Login successfull");
+        this.router.navigate(["dashboard"]);
+        this.uservice.loggedIn = true;
+      } else {
+        alert("Wrong email or password");
+      }  
+    }, err => {
+      console.log("Error: " + err)
+    });
     
   }
 }
