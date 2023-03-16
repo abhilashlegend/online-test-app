@@ -1,28 +1,62 @@
-# OnlineTestApp
+# Online Test App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.5.
+Online Test App is a Angular 15 Based web Application suitable for recruitment 
+team to take test of the candidates coming for interviews. Candidates can 
+register, login and take tests. After the test the candidates score will be given 
+on results page. 
 
-## Development server
+ Check out Live Preview [here](https://abhi-online-test-app.vercel.app/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Problem Statement
 
-## Code scaffolding
+As the project is progressing, the management has asked you to create an online test application in order to help the recruitment team take online tests of the candidates coming for interviews.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Technology Used
 
-## Build
+* Visual Studio Code
+* HTML / CSS
+* JavaScript
+* TypeScript
+* Angular
+* Bootstrap 5
+* NodeJS
+* GitHub
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Installation Instructions
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Go to the project folder and open command prompt. Type npm install command to install the 
+necessary packages and run “npm start” command to start the app on local 
+server. The server angular server will be hosted on http://localhost:4200 
 
-## Running end-to-end tests
+You would also need to download json server available at 
+https://github.com/abhilashlegend/online-test-app-api.git . You can run the 
+json server by going to folder and running “npm start” and json-server will be 
+hosted on http://localhost:3000. 
+Users who do not want to download and run locally, can checkout the demo 
+online at https://abhi-online-test-app.vercel.app/
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+## Login / Home Page 
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-"# online-test-app" 
+The Login page is also Home page that is simple and consists of email and 
+password fields to login. It has form validation that notifies the user of wrong 
+inputs. The user who wants to register new can register using register button.
+
+## Sign Up Page 
+
+The signup page consists of user details like first name, last name, email, 
+phone, qualification, password. The form is built using angular reactive form 
+that validates the user inputs and does validation. On submitting the form with 
+valid details user is register and then can login.
+
+## Quiz / Test Page 
+
+Once user logs in the user is taken to quiz / test page. The page contains 
+question and options to select. Once the user selects the radio button ( option) 
+the question is validated and stores the score. On answering all the questions 
+user can quit / logout the test.
+
+## Result Page
+
+When the user quits the test result is displayed to the user with the score. 

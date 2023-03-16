@@ -23,12 +23,15 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    let hasUser:boolean;
+    let hasUser:boolean = false;
     this.uservice.getUsers().subscribe(res => {
       
       res.find((a:any) => {
-        hasUser = a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
+        if(a.email === this.loginForm.value.email && a.password === this.loginForm.value.password){
+          hasUser = true;
+        }
       })
+      
       if(hasUser){
         alert("Login successfull");
         this.router.navigate(["dashboard"]);

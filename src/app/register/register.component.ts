@@ -4,17 +4,8 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from '../service/user.service';
+import { User } from '../user';
 
-interface User {
-  id: number;
-  firstname: string;
-  lastname: string;
-  email: string;
-  phone: string;
-  qualification: string;
-  password: string;
-  score: number;
-}
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -22,13 +13,9 @@ interface User {
 })
 export class RegisterComponent implements OnInit {
   public registerForm!: FormGroup;
-
-  private _jsonURL = 'http://localhost:3000/users';
   private _users:Array<User> = [];
 
-  constructor(private http: HttpClient, private router: Router, private uservice: UserService){
-    
-  }
+  constructor(private http: HttpClient, private router: Router, private uservice: UserService){ }
 
   ngOnInit():void{
     this.registerForm = new FormGroup({
@@ -63,9 +50,6 @@ export class RegisterComponent implements OnInit {
       }
       maxId = this._users["id"] + 1
     }
-
-    console.log(maxId);
-   
   
     delete this.registerForm.value.confirmpassword
       
@@ -73,9 +57,7 @@ export class RegisterComponent implements OnInit {
       id: maxId + 1,
       score: 0,
       ...this.registerForm.value
-    }
-
-    
+    } 
     
     this.uservice.postUser(newUser)
     .subscribe(res => {
