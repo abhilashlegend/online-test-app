@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from '../service/user.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,6 @@ export class LoginComponent implements OnInit {
   login() {
     let hasUser:boolean = false;
     this.uservice.getUsers().subscribe(res => {
-      
       res.find((a:any) => {
         if(a.email === this.loginForm.value.email && a.password === this.loginForm.value.password){
           hasUser = true;
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         alert("Wrong email or password");
       }  
     }, err => {
-      console.log("Error: " + err)
+      console.dir("Error: " + err)
     });
     
   }

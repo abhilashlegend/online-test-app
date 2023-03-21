@@ -11,11 +11,9 @@ import { TestService } from '../service/test.service';
 })
 export class QuizComponent implements OnInit {
 
-public selectedOptionClass:string = '';
+  public selectedOptionClass:string = '';
 
-public status: boolean = false;
-
-  private _quizUrl = '/assets/test.json';
+  public status: boolean = false;
 
   constructor(private http: HttpClient, private tservice: TestService, private router:Router){}
 
@@ -24,13 +22,9 @@ public status: boolean = false;
   public currentQue:number = 0;
 
   ngOnInit(): void {
-    this.getJSON().subscribe(res => {
-      this.test = res;
-    })
-  }
-
-  public getJSON(): Observable<any> {
-    return this.http.get(this._quizUrl);
+   this.tservice.getTest().subscribe(res => {
+    this.test = res;
+   })
   }
 
   public onSelectOptionHandler(e:any) {
@@ -38,7 +32,6 @@ public status: boolean = false;
    if(e.target.value === this.test[this.currentQue]["answer"]){
     this.tservice.score++;
    }
-   console.log(this.tservice.score);
   }
 
   nextQuestionHandler() {
